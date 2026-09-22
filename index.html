@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ECOAST — Engineering Computing Academy of Science and Technology. World-class programs in Engineering, Computing, Science and Technology.">
+<title>ECOAST — Engineering Computing Academy of Science and Technology</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0a2540;
+    --navy-2: #103a63;
+    --teal: #00c896;
+    --teal-dark: #009e78;
+    --amber: #ffb703;
+    --bg: #f6f9fc;
+    --card: #ffffff;
+    --text: #1d2b3a;
+    --muted: #5b6b7f;
+    --line: #e3eaf3;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; }
+  img { max-width: 100%; }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Header / Nav ---------- */
+  header {
+    background: var(--navy);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  }
+  .nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; max-width: 1140px; margin: 0 auto; }
+  .logo { display: flex; align-items: center; gap: 12px; color: #fff; }
+  .logo-mark {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--teal), #00a8e8);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 20px; color: #fff;
+    flex-shrink: 0;
+  }
+  .logo-text { line-height: 1.2; }
+  .logo-text strong { font-size: 22px; letter-spacing: 2px; display: block; }
+  .logo-text small { font-size: 10.5px; color: #9fb3c8; letter-spacing: .4px; display: block; }
+  nav ul { list-style: none; display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+  nav a.nav-link { color: #d7e3f0; padding: 8px 13px; border-radius: 8px; font-size: 14.5px; font-weight: 500; }
+  nav a.nav-link:hover { background: rgba(255,255,255,.1); color: #fff; }
+  .btn {
+    display: inline-block; padding: 12px 26px; border-radius: 10px;
+    font-weight: 700; font-size: 15px; border: none; cursor: pointer;
+  }
+  .btn-apply { background: var(--teal); color: #04263b; margin-left: 8px; }
+  .btn-apply:hover { background: #00e0a8; }
+  .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+  .btn-dark { background: var(--navy); color: #fff; }
+  .btn-dark:hover { background: var(--navy-2); }
+  #menu-toggle { display: none; }
+  .menu-btn { display: none; color: #fff; font-size: 28px; cursor: pointer; padding: 4px 8px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(160deg, #0a2540 0%, #103a63 55%, #0a6c5c 100%);
+    color: #fff;
+    padding: 84px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: ""; position: absolute; right: -120px; top: -120px;
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,200,150,.35), transparent 70%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; position: relative; z-index: 1; }
+  .badge {
+    display: inline-block; background: rgba(0,200,150,.15); border: 1px solid rgba(0,200,150,.5);
+    color: #7ef0cf; font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 7px 16px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .hero h1 { font-size: 46px; line-height: 1.12; margin-bottom: 16px; }
+  .hero h1 span { color: var(--teal); }
+  .hero p.lead { font-size: 18px; color: #c9d8e8; margin-bottom: 28px; max-width: 540px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+  .hero-mini-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+  .hero-mini-stats div strong { display: block; font-size: 26px; color: #fff; }
+  .hero-mini-stats div span { font-size: 13px; color: #9fb3c8; }
+  .hero-card {
+    background: #fff; color: var(--text); border-radius: 18px; padding: 30px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.3);
+  }
+  .hero-card h2 { font-size: 20px; margin-bottom: 6px; }
+  .hero-card > p { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .hero-card table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px; }
+  .hero-card td { padding: 9px 4px; border-bottom: 1px solid var(--line); }
+  .hero-card td:last-child { text-align: right; font-weight: 700; color: var(--teal-dark); }
+  .hero-card .btn { width: 100%; text-align: center; background: var(--teal); color: #04263b; }
+  .hero-card .btn:hover { background: #00e0a8; }
+  .hero-card small.note { display: block; text-align: center; margin-top: 12px; color: var(--muted); font-size: 12.5px; }
+
+  /* ---------- Strip ---------- */
+  .strip { background: var(--navy); border-top: 1px solid rgba(255,255,255,.1); color: #9fb3c8; padding: 16px 0; font-size: 13.5px; }
+  .strip .wrap { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; justify-content: center; }
+  .strip b { color: #fff; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 72px 0; }
+  .section-head { text-align: center; max-width: 680px; margin: 0 auto 44px; }
+  .eyebrow { color: var(--teal-dark); font-weight: 800; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+  .section-head h2 { font-size: 34px; margin-bottom: 12px; color: var(--navy); }
+  .section-head p { color: var(--muted); font-size: 16.5px; }
+  section.alt { background: #fff; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .about-grid h3 { color: var(--navy); font-size: 22px; margin-bottom: 12px; }
+  .about-grid p { color: var(--muted); margin-bottom: 16px; }
+  .check-list { list-style: none; margin-top: 8px; }
+  .check-list li { padding: 10px 0 10px 34px; position: relative; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .check-list li:last-child { border-bottom: none; }
+  .check-list li::before { content: "✔"; position: absolute; left: 0; top: 10px; width: 24px; height: 24px; background: #e6f9f2; color: var(--teal-dark); border-radius: 50%; font-size: 13px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+  .values { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  .value-box { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .value-box .icon { font-size: 28px; margin-bottom: 8px; }
+  .value-box h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+  .value-box p { font-size: 13.5px; margin: 0; }
+
+  /* Programs */
+  .program-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .program-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .program-top { padding: 26px 28px 20px; color: #fff; }
+  .program-top .field { font-size: 12px; font-weight: 800; letter-spacing: 2px; opacity: .85; }
+  .program-top h3 { font-size: 23px; margin: 6px 0 4px; }
+  .program-top p { font-size: 14px; opacity: .9; }
+  .p-eng { background: linear-gradient(135deg, #103a63, #1d5fa8); }
+  .p-comp { background: linear-gradient(135deg, #0a6c5c, #00c896); }
+  .p-sci { background: linear-gradient(135deg, #5b2a86, #9d4edd); }
+  .p-tech { background: linear-gradient(135deg, #9a5b00, #ffb703); }
+  .program-body { padding: 20px 28px 26px; }
+  .program-body ul { list-style: none; font-size: 14.5px; }
+  .program-body li { padding: 9px 0; border-bottom: 1px dashed var(--line); color: var(--text); }
+  .program-body li:last-child { border-bottom: none; }
+  .program-body li span.deg { float: right; background: var(--bg); border: 1px solid var(--line); font-size: 12px; font-weight: 700; color: var(--navy); padding: 2px 10px; border-radius: 100px; }
+  .program-body a.more { display: inline-block; margin-top: 12px; font-weight: 700; color: var(--teal-dark); font-size: 14.5px; }
+
+  /* Features */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .feature { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 28px 24px; text-align: center; }
+  .feature .f-icon { width: 58px; height: 58px; border-radius: 16px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; background: #e6f9f2; }
+  .feature h3 { font-size: 17.5px; color: var(--navy); margin-bottom: 8px; }
+  .feature p { font-size: 14px; color: var(--muted); }
+
+  /* Stats band */
+  .stats-band { background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff; padding: 56px 0; }
+  .stats-band .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+  .stats-band strong { display: block; font-size: 40px; color: var(--teal); }
+  .stats-band span { font-size: 14px; color: #c9d8e8; }
+
+  /* Admissions */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; }
+  .step { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px 20px; text-align: center; position: relative; }
+  .step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: 800; font-size: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+  .step h3 { font-size: 16px; color: var(--navy); margin-bottom: 8px; }
+  .step p { font-size: 13.5px; color: var(--muted); }
+  .scholarship { background: #fff8e6; border: 2px dashed var(--amber); border-radius: 16px; padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; }
+  .scholarship h3 { color: #7a4d00; font-size: 21px; margin-bottom: 8px; }
+  .scholarship p { color: #6b5a2e; font-size: 15px; }
+  .scholarship ul { margin: 12px 0 0 18px; color: #6b5a2e; font-size: 14px; }
+
+  /* Campus + News */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .facility-list { list-style: none; }
+  .facility-list li { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; display: flex; gap: 16px; align-items: flex-start; }
+  .facility-list .fi { font-size: 30px; }
+  .facility-list h4 { color: var(--navy); font-size: 16px; margin-bottom: 4px; }
+  .facility-list p { font-size: 13.5px; color: var(--muted); }
+  .news-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; margin-bottom: 14px; }
+  .news-card .date { display: inline-block; background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 100px; margin-bottom: 10px; }
+  .news-card h4 { color: var(--navy); font-size: 16.5px; margin-bottom: 6px; }
+  .news-card p { font-size: 14px; color: var(--muted); }
+
+  /* Testimonials */
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .quote { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px; }
+  .quote .stars { color: var(--amber); letter-spacing: 2px; margin-bottom: 12px; }
+  .quote blockquote { font-size: 14.5px; color: var(--text); font-style: italic; margin-bottom: 16px; }
+  .quote .who strong { display: block; font-size: 14.5px; color: var(--navy); }
+  .quote .who span { font-size: 12.5px; color: var(--muted); }
+
+  /* FAQ */
+  .faq { max-width: 760px; margin: 0 auto; }
+  details { background: #fff; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 12px; padding: 0; overflow: hidden; }
+  summary { padding: 18px 22px; cursor: pointer; font-weight: 700; color: var(--navy); font-size: 15.5px; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "+ "; color: var(--teal-dark); font-weight: 800; }
+  details[open] summary::before { content: "− "; }
+  details p { padding: 0 22px 18px; color: var(--muted); font-size: 14.5px; }
+
+  /* Contact / Apply */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: start; }
+  .contact-info { background: var(--navy); color: #fff; border-radius: 18px; padding: 34px 30px; }
+  .contact-info h3 { font-size: 22px; margin-bottom: 8px; }
+  .contact-info > p { color: #9fb3c8; font-size: 14.5px; margin-bottom: 24px; }
+  .contact-info address { font-style: normal; font-size: 14.5px; }
+  .contact-info address p { margin-bottom: 16px; padding-left: 34px; position: relative; }
+  .contact-info address p b { display: block; color: #fff; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+  form.apply { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 34px 30px; }
+  form.apply h3 { font-size: 22px; color: var(--navy); margin-bottom: 6px; }
+  form.apply > p { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { margin-bottom: 14px; }
+  label { display: block; font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  input, select, textarea {
+    width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px;
+    font-size: 14.5px; font-family: inherit; color: var(--text); background: #fbfdff;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--teal); background: #fff; }
+  textarea { resize: vertical; min-height: 110px; }
+  form.apply .btn { width: 100%; background: var(--teal); color: #04263b; font-size: 16px; margin-top: 6px; }
+  form.apply .btn:hover { background: #00e0a8; }
+
+  /* Footer */
+  footer { background: #071a2e; color: #9fb3c8; padding: 56px 0 0; font-size: 14px; }
+  .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 32px; padding-bottom: 40px; }
+  footer h4 { color: #fff; font-size: 15px; margin-bottom: 16px; letter-spacing: .5px; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a { color: #9fb3c8; }
+  footer ul a:hover { color: var(--teal); }
+  footer .brand p { margin-top: 12px; font-size: 13.5px; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding: 20px 0; text-align: center; font-size: 13px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .hero-grid, .about-grid, .two-col, .contact-grid { grid-template-columns: 1fr; }
+    .program-grid { grid-template-columns: 1fr; }
+    .features, .quotes { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .stats-band .wrap { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 36px; }
+    .menu-btn { display: block; }
+    nav ul {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--navy); flex-direction: column; align-items: stretch;
+      padding: 10px 20px 20px; border-top: 1px solid rgba(255,255,255,.1);
+    }
+    #menu-toggle:checked + .menu-btn + nav ul { display: flex; }
+    nav ul li { width: 100%; }
+    nav a.nav-link { display: block; padding: 12px; }
+    .btn-apply { margin: 8px 0 0; text-align: center; }
+    header { position: relative; }
+    .nav-bar { position: relative; }
+    nav { position: static; }
+  }
+  @media (max-width: 560px) {
+    .features, .quotes, .steps { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .values { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 30px; }
+    section { padding: 52px 0; }
+    .scholarship { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="nav-bar">
+    <a class="logo" href="#home">
+      <span class="logo-mark">E</span>
+      <span class="logo-text">
+        <strong>ECOAST</strong>
+        <small>Engineering Computing Academy of Science &amp; Technology</small>
+      </span>
+    </a>
+    <input type="checkbox" id="menu-toggle">
+    <label class="menu-btn" for="menu-toggle" aria-label="Open menu">☰</label>
+    <nav>
+      <ul>
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#programs">Programs</a></li>
+        <li><a class="nav-link" href="#admissions">Admissions</a></li>
+        <li><a class="nav-link" href="#campus">Campus</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+        <li><a class="btn btn-apply" href="#apply">Apply Now</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge">★ ADMISSIONS OPEN — 2026 / 2027</span>
+      <h1>Engineering Tomorrow.<br>Computing <span>Today.</span></h1>
+      <p class="lead">ECOAST — the Engineering Computing Academy of Science and Technology — trains world-class engineers, developers, scientists and innovators through hands-on, industry-driven education.</p>
+      <div class="hero-cta">
+        <a class="btn btn-apply" href="#apply" style="margin-left:0">Apply for Admission</a>
+        <a class="btn btn-outline" href="#programs">Explore Programs</a>
+      </div>
+      <div class="hero-mini-stats">
+        <div><strong>8,500+</strong><span>Students Enrolled</span></div>
+        <div><strong>96%</strong><span>Graduate Employment</span></div>
+        <div><strong>40+</strong><span>Degree Programs</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h2>🎓 2026 Intake at a Glance</h2>
+      <p>Four schools. One mission: your future in STEM.</p>
+      <table>
+        <tr><td>🏗️ School of Engineering</td><td>12 programs</td></tr>
+        <tr><td>💻 School of Computing</td><td>11 programs</td></tr>
+        <tr><td>🔬 School of Science</td><td>9 programs</td></tr>
+        <tr><td>⚙️ School of Technology</td><td>8 programs</td></tr>
+      </table>
+      <a class="btn" href="#programs">View All Programs</a>
+      <small class="note">Application deadline: <b>30 November 2026</b></small>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <span><b>✔ Accredited</b> Curricula</span>
+    <span><b>✔ 300+</b> Industry Partners</span>
+    <span><b>✔ 120+</b> Expert Faculty</span>
+    <span><b>✔ 25</b> Years of Excellence</span>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">About ECOAST</span>
+      <h2>A Academy Built for the Future</h2>
+      <p>Since 2001, the Engineering Computing Academy of Science and Technology has blended rigorous academics with real-world practice.</p>
+    </div>
+    <div class="about-grid">
+      <div>
+        <h3>Our Mission</h3>
+        <p>To empower the next generation of engineers, computer scientists and technologists with the knowledge, ethics and hands-on skills to solve the world's toughest challenges — from sustainable energy to artificial intelligence.</p>
+        <h3>Why Students Choose ECOAST</h3>
+        <ul class="check-list">
+          <li><b>Project-based learning</b> — build real systems from your first semester</li>
+          <li><b>Modern labs &amp; workshops</b> — robotics, AI, networks, fabrication &amp; research labs</li>
+          <li><b>Industry internships</b> — guaranteed placement support with 300+ partners</li>
+          <li><b>Global pathways</b> — exchange programs and transfer agreements worldwide</li>
+          <li><b>Scholarships</b> — merit, need-based and women-in-STEM awards</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Our Core Values</h3>
+        <p>Every program, lecture and laboratory at ECOAST is guided by five principles:</p>
+        <div class="values">
+          <div class="value-box"><div class="icon">💡</div><h4>Innovation</h4><p>We turn curiosity into working prototypes and startups.</p></div>
+          <div class="value-box"><div class="icon">🤝</div><h4>Integrity</h4><p>Ethical engineering and responsible technology first.</p></div>
+          <div class="value-box"><div class="icon">🌍</div><h4>Impact</h4><p>Solutions for communities, climate and industry.</p></div>
+          <div class="value-box"><div class="icon">📚</div><h4>Excellence</h4><p>Accredited programs taught by PhD-level experts.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRAMS ================= -->
+<section id="programs" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Academics</span>
+      <h2>Schools &amp; Programs</h2>
+      <p>Four specialised schools offering diplomas, bachelor's, master's and professional certificates.</p>
+    </div>
+    <div class="program-grid">
+      <article class="program-card">
+        <div class="program-top p-eng">
+          <span class="field">SCHOOL OF ENGINEERING</span>
+          <h3>🏗️ Engineering</h3>
+          <p>Design, build and maintain the physical world.</p>
+        </div>
+        <div class="program-body">
+          <ul>
+            <li>Civil Engineering <span class="deg">BSc / MSc</span></li>
+            <li>Electrical &amp; Electronics Engineering <span class="deg">BSc / MSc</span></li>
+            <li>Mechanical Engineering <span class="deg">BSc</span></li>
+            <li>Mechatronics &amp; Robotics <span class="deg">BSc</span></li>
+          </ul>
+          <a class="more" href="#apply">Apply to this school →</a>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="program-top p-comp">
+          <span class="field">SCHOOL OF COMPUTING</span>
+          <h3>💻 Computing</h3>
+          <p>Software, data and intelligent systems.</p>
+        </div>
+        <div class="program-body">
+          <ul>
+            <li>Computer Science <span class="deg">BSc / MSc</span></li>
+            <li>Software Engineering <span class="deg">BSc</span></li>
+            <li>Artificial Intelligence &amp; Data Science <span class="deg">BSc / MSc</span></li>
+            <li>Cybersecurity &amp; Networks <span class="deg">BSc</span></li>
+          </ul>
+          <a class="more" href="#apply">Apply to this school →</a>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="program-top p-sci">
+          <span class="field">SCHOOL OF SCIENCE</span>
+          <h3>🔬 Science</h3>
+          <p>Discovery through research and experimentation.</p>
+        </div>
+        <div class="program-body">
+          <ul>
+            <li>Applied Mathematics <span class="deg">BSc</span></li>
+            <li>Physics &amp; Renewable Energy <span class="deg">BSc / MSc</span></li>
+            <li>Biotechnology <span class="deg">BSc</span></li>
+            <li>Environmental Science <span class="deg">BSc</span></li>
+          </ul>
+          <a class="more" href="#apply">Apply to this school →</a>
+        </div>
+      </article>
+      <article class="program-card">
+        <div class="program-top p-tech">
+          <span class="field">SCHOOL OF TECHNOLOGY</span>
+          <h3>⚙️ Technology</h3>
+          <p>Practical tech skills for modern industry.</p>
+        </div>
+        <div class="program-body">
+          <ul>
+            <li>Information Technology <span class="deg">Dip / BSc</span></li>
+            <li>Cloud &amp; DevOps Engineering <span class="deg">Cert / BSc</span></li>
+            <li>Telecommunications Technology <span class="deg">BSc</span></li>
+            <li>Multimedia &amp; Creative Tech <span class="deg">Dip / BSc</span></li>
+          </ul>
+          <a class="more" href="#apply">Apply to this school →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ECOAST ================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The ECOAST Advantage</span>
+      <h2>Why ECOAST?</h2>
+      <p>Everything on campus is designed to take you from classroom to career.</p>
+    </div>
+    <div class="features">
+      <div class="feature"><div class="f-icon">🧪</div><h3>Hands-On Labs</h3><p>12 specialised laboratories, fabrication workshops and a 24/7 innovation hub.</p></div>
+      <div class="feature"><div class="f-icon">👩‍🏫</div><h3>Expert Faculty</h3><p>120+ lecturers and professors, 70% holding PhDs with industry experience.</p></div>
+      <div class="feature"><div class="f-icon">💼</div><h3>Career Guarantee</h3><p>Dedicated careers office, internships and a 96% graduate employment rate.</p></div>
+      <div class="feature"><div class="f-icon">🌐</div><h3>Global Network</h3><p>Exchange semesters, joint degrees and alumni in 30+ countries.</p></div>
+      <div class="feature"><div class="f-icon">🚀</div><h3>Startup Incubator</h3><p>ECOAST Launchpad has supported 80+ student startups with funding and mentors.</p></div>
+      <div class="feature"><div class="f-icon">🏆</div><h3>Award Winning</h3><p>National Best STEM Academy 2024 &amp; 2025 — recognised for teaching quality.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<div class="stats-band">
+  <div class="wrap">
+    <div><strong>8,500+</strong><span>Students</span></div>
+    <div><strong>12,000+</strong><span>Alumni Worldwide</span></div>
+    <div><strong>300+</strong><span>Industry Partners</span></div>
+    <div><strong>96%</strong><span>Employment Rate</span></div>
+  </div>
+</div>
+
+<!-- ================= ADMISSIONS ================= -->
+<section id="admissions" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Join ECOAST</span>
+      <h2>Admissions Made Simple</h2>
+      <p>Four easy steps to become part of the 2026/2027 cohort.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Choose a Program</h3><p>Browse our 40+ programs and pick the school that fits your passion.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Submit Application</h3><p>Fill in the online form below with your academic records.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Aptitude Interview</h3><p>Meet our admissions team — on campus or online.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Enrol &amp; Begin</h3><p>Receive your offer, register, and start building your future.</p></div>
+    </div>
+    <div class="scholarship">
+      <div>
+        <h3>🎓 Scholarships up to 100% Tuition</h3>
+        <p>ECOAST believes talent should never be blocked by finances. Every applicant is automatically considered for:</p>
+        <ul>
+          <li><b>Merit Excellence Award</b> — up to 100% for top entrance-exam scores</li>
+          <li><b>Women in STEM Grant</b> — 50% tuition for female engineering &amp; computing students</li>
+          <li><b>Innovation Bursary</b> — for students with outstanding projects or portfolios</li>
+        </ul>
+      </div>
+      <div><a class="btn btn-dark" href="#apply">Claim Your Scholarship</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CAMPUS & NEWS ================= -->
+<section id="campus">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Student Life</span>
+      <h2>Campus &amp; Events</h2>
+      <p>Life at ECOAST goes far beyond lectures — clubs, hackathons, sports and festivals.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <ul class="facility-list">
+          <li><span class="fi">🏢</span><div><h4>Innovation Hub &amp; Library</h4><p>24/7 study spaces, 50,000+ books and digital journals, plus maker equipment.</p></div></li>
+          <li><span class="fi">🤖</span><div><h4>Robotics &amp; AI Labs</h4><p>Industry-grade GPUs, robot arms, IoT kits and embedded-systems benches.</p></div></li>
+          <li><span class="fi">🏠</span><div><h4>Student Hostels</h4><p>Safe on-campus accommodation with Wi-Fi, study rooms and cafeterias.</p></div></li>
+          <li><span class="fi">⚽</span><div><h4>Sports &amp; Clubs</h4><p>Football, basketball, chess, debate, coding club, drama and 20+ societies.</p></div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="news-card"><span class="date">OCT 2026</span><h4>ECOAST Tech Expo &amp; Open Day</h4><p>Tour the campus, meet faculty and watch live robotics and AI demos. Free entry for all prospective students.</p></div>
+        <div class="news-card"><span class="date">NOV 2026</span><h4>National Hackathon Finals</h4><p>ECOAST hosts 40 university teams competing for a $10,000 prize and incubation spots.</p></div>
+        <div class="news-card"><span class="date">DEC 2026</span><h4>Graduation Ceremony — Class of 2026</h4><p>Celebrating 1,200+ graduates joining industries and top graduate schools worldwide.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Success Stories</span>
+      <h2>What Our Graduates Say</h2>
+      <p>From startup founders to research scientists — ECOAST alumni lead everywhere.</p>
+    </div>
+    <div class="quotes">
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The hands-on projects at ECOAST meant I graduated with a portfolio, not just a certificate. I signed a software engineering job before final exams."</blockquote>
+        <div class="who"><strong>Sarah Mensah</strong><span>BSc Software Engineering, 2023 — Software Engineer</span></div>
+      </div>
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The robotics lab and amazing mentors turned my final-year project into a startup. We now employ six people thanks to the ECOAST Launchpad."</blockquote>
+        <div class="who"><strong>David Okafor</strong><span>BSc Mechatronics, 2022 — Startup Founder</span></div>
+      </div>
+      <div class="quote">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Small classes, caring lecturers and real industry internships. ECOAST gave me the confidence and skills to win a full master's scholarship abroad."</blockquote>
+        <div class="who"><strong>Grace Kimani</strong><span>BSc Data Science, 2024 — MSc Scholar</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Good to Know</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>What are the entry requirements?</summary>
+        <p>Diploma programs require a secondary-school certificate; bachelor's programs require passes in Mathematics, English and two science subjects (or equivalent). Master's applicants need a recognised bachelor's degree. Mature and transfer students are welcome.</p>
+      </details>
+      <details>
+        <summary>Does ECOAST offer online or evening classes?</summary>
+        <p>Yes. Most computing and technology programs offer evening, weekend and blended online options so working students can study flexibly.</p>
+      </details>
+      <details>
+        <summary>Is accommodation available on campus?</summary>
+        <p>Yes — our hostels house 2,000+ students with Wi-Fi, security, study rooms and meal plans. Hostel places are allocated first-come, first-served.</p>
+      </details>
+      <details>
+        <summary>How do scholarships work?</summary>
+        <p>Every applicant is automatically considered. Merit awards are based on entrance results, while need-based and Women-in-STEM grants require a short additional statement in your application.</p>
+      </details>
+      <details>
+        <summary>When do classes start?</summary>
+        <p>The 2026/2027 academic year begins in January 2027 for most programs, with a September 2026 early-start option for selected diplomas and certificates.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT / APPLY ================= -->
+<section id="contact" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Visit Us or Apply Online</h2>
+      <p>Questions? Call, email or drop by — or send your application straight away.</p>
+    </div>
+    <div class="contact-grid" id="apply">
+      <div class="contact-info">
+        <h3>📍 Contact ECOAST</h3>
+        <p>Our admissions team replies within 24 hours on working days.</p>
+        <address>
+          <p><b>Address</b>123 Innovation Avenue, Knowledge City<br>PO Box 4567</p>
+          <p><b>Phone</b>+123 456 789 000<br>+123 456 789 001</p>
+          <p><b>Email</b>admissions@ecoast.edu<br>info@ecoast.edu</p>
+          <p><b>Office Hours</b>Mon – Fri: 8:00 AM – 5:00 PM<br>Sat: 9:00 AM – 1:00 PM</p>
+        </address>
+      </div>
+      <form class="apply" action="mailto:admissions@ecoast.edu" method="post" enctype="text/plain">
+        <h3>📝 Application Form</h3>
+        <p>2026/2027 intake — it takes less than 3 minutes.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name *</label>
+            <input type="text" id="fname" name="first_name" placeholder="e.g. Jane" required>
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name *</label>
+            <input type="text" id="lname" name="last_name" placeholder="e.g. Doe" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+123 456 789" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="school">Choose a School *</label>
+          <select id="school" name="school" required>
+            <option value="">-- Select a school --</option>
+            <option>School of Engineering</option>
+            <option>School of Computing</option>
+            <option>School of Science</option>
+            <option>School of Technology</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="program">Preferred Program *</label>
+          <select id="program" name="program" required>
+            <option value="">-- Select a program --</option>
+            <option>Civil Engineering</option>
+            <option>Electrical &amp; Electronics Engineering</option>
+            <option>Mechanical Engineering</option>
+            <option>Mechatronics &amp; Robotics</option>
+            <option>Computer Science</option>
+            <option>Software Engineering</option>
+            <option>Artificial Intelligence &amp; Data Science</option>
+            <option>Cybersecurity &amp; Networks</option>
+            <option>Applied Mathematics</option>
+            <option>Physics &amp; Renewable Energy</option>
+            <option>Biotechnology</option>
+            <option>Environmental Science</option>
+            <option>Information Technology</option>
+            <option>Cloud &amp; DevOps Engineering</option>
+            <option>Telecommunications Technology</option>
+            <option>Multimedia &amp; Creative Tech</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="level">Study Level *</label>
+          <select id="level" name="level" required>
+            <option value="">-- Select level --</option>
+            <option>Certificate</option>
+            <option>Diploma</option>
+            <option>Bachelor's Degree</option>
+            <option>Master's Degree</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="msg">Why do you want to join ECOAST?</label>
+          <textarea id="msg" name="message" placeholder="Tell us briefly about your goals and interests..."></textarea>
+        </div>
+        <button class="btn" type="submit">Submit Application</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap footer-grid">
+    <div class="brand">
+      <a class="logo" href="#home">
+        <span class="logo-mark">E</span>
+        <span class="logo-text"><strong style="color:#fff">ECOAST</strong><small>Engineering Computing Academy of Science &amp; Technology</small></span>
+      </a>
+      <p>Training engineers, developers, scientists and innovators since 2001. Accredited STEM education with a 96% employment rate.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#admissions">Admissions</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Our Schools</h4>
+      <ul>
+        <li><a href="#programs">School of Engineering</a></li>
+        <li><a href="#programs">School of Computing</a></li>
+        <li><a href="#programs">School of Science</a></li>
+        <li><a href="#programs">School of Technology</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>123 Innovation Avenue, Knowledge City</li>
+        <li>+123 456 789 000</li>
+        <li><a href="mailto:info@ecoast.edu">info@ecoast.edu</a></li>
+        <li>Mon – Fri: 8:00 AM – 5:00 PM</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">© 2026 ECOAST — Engineering Computing Academy of Science and Technology. All rights reserved. | Designed with HTML only.</div>
+  </div>
+</footer>
+
+</body>
+</html>
